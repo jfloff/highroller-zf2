@@ -21,7 +21,7 @@ Installation
 
 #### By cloning project
 
-1. Install the [HighRoller-ZF2](https://github.com/jfloff/highroller-zf2) module
+1. Install the [highroller-zf2](https://github.com/jfloff/highroller-zf2) module
    by cloning it into `./vendor/`.
 2. Clone this project into your `./vendor/` directory.
 
@@ -30,16 +30,22 @@ Installation
 1. Add this project in your composer.json:
 
     ```json
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/jfloff/highroller-zf2"
+        }
+    ],
+
     "require": {
-        "zf-commons/zfc-base": "dev-master",
-        "zf-commons/zfc-user": "dev-master"
+        "jfloff/highroller-zf2": "dev-master",
     }
     ```
 
-2. Now tell composer to download ZfcUser by running the command:
+2. Now tell composer to download **highroller-zf2** by running the command:
 
     ```bash
-    $ php composer.phar update
+    $ composer update
     ```
 
 #### Post installation
@@ -51,8 +57,7 @@ Installation
     return array(
         'modules' => array(
             // ...
-            'ZfcBase',
-            'ZfcUser',
+            'Highroller',
         ),
         // ...
     );

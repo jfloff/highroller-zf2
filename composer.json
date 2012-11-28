@@ -1,0 +1,28 @@
+{
+    "name": "jfloff/highroller-zf2",
+    "description": "Highroller package ready for Zend Framework 2 integration.",
+    "type": "library",
+    "keywords": [
+        "zf2",
+        "highroller",
+        "highcharts"
+    ],
+    "homepage": "https://github.com/jfloff/highroller-zf2",
+    "authors": [
+        {
+            "name": "João Loff",
+            "homepage": "http://twitter.com/jfloff"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "HighRoller": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
