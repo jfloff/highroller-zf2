@@ -188,11 +188,28 @@ class HighRoller {
     return trim($chartJS);
   }
 
+  /** returns HighRoller Object in a filtered array. No null or empty arrays are shown
+   * @return array - filtered object to array
+   */
+  private function toArray($obj) {
+    $arrObj = is_object($obj) ? get_object_vars($obj) : $obj;
+
+    foreach ($arrObj as $key => $val) {
+      $val = (is_array($val) || is_object($val)) ? $this->toArray($val) : $val;
+      // tests if val is false due to some boolean options
+      if(!empty($val) || ($val === false))
+        $arr[$key] = $val;
+    }
+
+    return (isset($arr)) ? $arr : NULL;
+  }
+
   /** returns valid Highcharts javascript object containing your HighRoller options, for manipulation between the markup script tags on your page`
    * @return string - highcharts options object!
    */
   function getChartOptionsObject(){
-    return trim(json_encode($this));
+    $array = $this->toArray($this);
+    return trim(json_encode($array));
   }
 
   /** returns new Highcharts.Chart() using your $varname
@@ -425,6 +442,8 @@ class HighRollerCredits {
  */
 
 class HighRollerDataLabels {
+
+  public $formatter = "";
 
   function __construct(){
     $this->style = new HighRollerStyle();
@@ -693,7 +712,7 @@ class HighRollerPlotOptions {
 
   function __construct($chartType){
 
-    $this->series = new HighRollerSeriesOptions();
+    $this->series = new HighRollerPlotOptionsSeriesOptions();
     if($chartType == 'area'){ $this->area = new HighRollerPlotOptionsByChartType(); }
     else if($chartType == 'bar'){ $this->bar = new HighRollerPlotOptionsByChartType(); }
     else if($chartType == 'column'){ $this->column = new HighRollerPlotOptionsByChartType(); }
@@ -764,6 +783,9 @@ class HighRollerPlotOptionsByChartType {
 
 class HighRollerSeries {
 
+  public $name;
+  public $data = array();
+
   function __construct(){
   }
 
@@ -773,7 +795,7 @@ class HighRollerSeries {
  * Author: jmac
  * Date: 9/23/11
  * Time: 12:40 PM
- * Desc: HighRoller Series Data Options
+ * Desc: HighRoller Series Options
  *
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
@@ -792,7 +814,7 @@ class HighRollerSeries {
  *
  */
 
-class HighRollerSeriesOptions {
+class HighRollerPlotOptionsSeriesOptions {
 
   public $dataLabels;
   public $stacking = null;
@@ -927,7 +949,7 @@ class HighRollerXAxis {
 
   public $labels;
   public $title;
-  public $categories;
+  public $categories = array();
   public $type;
   public $tickInterval;
   public $plotLines = array();    // @TODO instantiating a new plotLines object isn't working, setting as an array

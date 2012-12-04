@@ -25,8 +25,7 @@
 class HighRollerSeriesData {
 
   public $name;
-  public $data = array();
-  public $type;
-  public $color;
+  public $data;
 }
+
 ?>
