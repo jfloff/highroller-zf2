@@ -24,8 +24,16 @@
 
 class HighRollerSeriesData {
 
-  public $name;
-  public $data;
+	public $name;
+	public $data = array();
+
+	/** add data to your series data
+	* @param $chartdata - array or HighRollerSeriesData
+	* @return void
+	*/
+	public function addData($chartdata){
+		array_push($this->data, $chartdata);
+	}
 }
 
 ?>

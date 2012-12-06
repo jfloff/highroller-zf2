@@ -789,6 +789,13 @@ class HighRollerSeries {
   function __construct(){
   }
 
+  /** add data to your series data
+  * @param $chartdata - array or HighRollerSeriesData
+  * @return void
+  */
+  public function addData($chartdata){
+    array_push($this->data, $chartdata);
+  }
 }
 ?><?php
 /**
