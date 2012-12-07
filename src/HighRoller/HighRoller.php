@@ -794,7 +794,7 @@ class HighRollerSeries {
   * @return void
   */
   public function addData($chartdata){
-    array_push($this->data, $chartdata);
+    $this->data[] = $chartdata;
   }
 }
 ?><?php
