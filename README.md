@@ -57,7 +57,7 @@ Installation
     return array(
         'modules' => array(
             // ...
-            'Highroller',
+            'HighRoller',
         ),
         // ...
     );
