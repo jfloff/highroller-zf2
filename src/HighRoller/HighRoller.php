@@ -197,7 +197,7 @@ class HighRoller {
     foreach ($arrObj as $key => $val) {
       $val = (is_array($val) || is_object($val)) ? $this->toArray($val) : $val;
       // tests if val is false due to some boolean options
-      if(!empty($val) || ($val === false))
+      if(!empty($val) || ($val === false) || ($val === 0))
         $arr[$key] = $val;
     }
 
