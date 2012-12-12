@@ -38,7 +38,7 @@ Installation
     ],
 
     "require": {
-        "jfloff/highroller-zf2": "dev-master",
+        "jfloff/highroller-zf2": "dev-master"
     }
     ```
 
