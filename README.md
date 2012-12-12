@@ -58,6 +58,7 @@ Installation
         'modules' => array(
             // ...
             'HighRoller',
+            'AssetManager',
         ),
         // ...
     );
