@@ -99,14 +99,17 @@ Open `module/Application/src/Application/Controller/IndexController.php`.
 
 Open `module/Application/view/application/index/index.phtml`
 
-4. Include highcharts.js file (you could also do this in your layout):
-    ```html
+1. Include highcharts.js file (you could also do this in your layout):
+    ```phtml
     <?php echo $this->headScript()->prependFile($this->basePath() . '/js/highcharts.js'); ?>
     ```
 
-5. Add an HTML div where your chart will be rendered to. Set the div id in the HighRoller object. And finally append the render script:
+2. At the top of the file:
+    * Add a HTML div where your chart will be rendered to,
+    * Set the div id in the HighRoller object,
+    * Finally append the render script.
 
-    ```html
+    ```phtml
     <div id="highroller"></div>
     <?php
         $this->highroller->chart->renderTo = "highroller";
@@ -114,9 +117,9 @@ Open `module/Application/view/application/index/index.phtml`
     ?>
     ```
 
-6. You should now see a beautiful simple line chart in your main page, just like this one:
+3. You should now see a beautiful simple line chart in your main page, just like this one:
 
-![linechart](http://imgur.com/IXGd7)
+![linechart](http://i.imgur.com/IXGd7.png)
 
 
 Licensing
@@ -125,7 +128,7 @@ HighRoller is licensed by Gravity.com under the Apache 2.0 license, see the LICE
 
 Highcharts is licensed by Highsoft Solutions AS and can be obtained here:
 
-[http://www.highcharts.com/products/highcharts] (http://www.highcharts.com/products/highcharts).
+[http://www.highcharts.com/products/highcharts](http://www.highcharts.com/products/highcharts).
 
 Highcharts is licensed for free for any personal or non-profit projects under the [Creative Commons Attribution-NonCommercial
 3.0 License] (http://creativecommons.org/licenses/by-nc/3.0/).
