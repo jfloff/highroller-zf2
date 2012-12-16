@@ -11,8 +11,6 @@ HighRoller gets Highcharts up and running in your PHP project fast.
 * Gravity [Home Page](http://gravity.com)
 * Highcharts [Home Page](http://www.highcharts.com/)
 
-This package is a my own [fork](https://github.com/jfloff/HighRoller) ready for Zend Framework 2 integration.
-
 
 Installation
 ------------
@@ -50,7 +48,7 @@ Installation
 
 #### Post installation
 
-1. Enabling it in your `application.config.php`file.
+Enabling it in your `application.config.php`file.
 
     ```php
     <?php
@@ -126,9 +124,9 @@ Licensing
 ------------
 HighRoller is licensed by Gravity.com under the Apache 2.0 license, see the LICENSE file for more details.
 
-Highcharts is licensed by Highsoft Solutions AS and can be obtained here:
+HighRoller comes with a copy of Highcharts.
 
-[http://www.highcharts.com/products/highcharts](http://www.highcharts.com/products/highcharts).
+HighCharts is licensed by Highsoft Solutions AS.
 
 Highcharts is licensed for free for any personal or non-profit projects under the [Creative Commons Attribution-NonCommercial
 3.0 License] (http://creativecommons.org/licenses/by-nc/3.0/).
