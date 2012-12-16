@@ -3,6 +3,7 @@
 /*
 * HighRoller -- PHP wrapper for the popular JS charting library Highcharts
 * Author:       jmaclabs@gmail.com
+* Contributor:	jfloff@gmail.com
 * File:         HighRoller.php
 * Date:         Mon Aug 13 14:23:49 WEST 2012
 * Version:      1.0.0
@@ -23,7 +24,7 @@
 * limitations under the License.
 *
 */
-
+?><?php
 /**
 * Author: jmaclabs
 * Date: 9/14/11
@@ -49,177 +50,166 @@
 
 class HighRoller {
 
-  public $chart;
-  public $title;
-  public $legend;
-  public $tooltip;
-  public $plotOptions;
-  public $series = array();
+	public $chart;
+	public $title;
+	public $legend;
+	public $tooltip;
+	public $plotOptions;
+	public $series = array();
 
-  function __construct(){
-    $this->chart = new HighRollerChart();
-    $this->title = new HighRollerTitle();
-    $this->legend = new HighRollerLegend();
-    $this->tooltip = new HighRollerToolTip();
-    $this->series = new HighRollerSeries();
-  }
+	function __construct(){
+		$this->chart = new HighRollerChart();
+		$this->title = new HighRollerTitle();
+		$this->legend = new HighRollerLegend();
+		$this->tooltip = new HighRollerToolTip();
+		$this->series = new HighRollerSeries();
+	}
 
-  function initPlotOptions(){
-    $this->plotOptions = new HighRollerPlotOptions($this->chart->type);
-    //$this->plotOptions->column = new HighRollerPlotOptionsByChartType($this->chart->type);
-  }
+	function initPlotOptions(){
+		$this->plotOptions = new HighRollerPlotOptions($this->chart->type);
+		//$this->plotOptions->column = new HighRollerPlotOptionsByChartType($this->chart->type);
+	}
 
+	/** returns a javascript script tag with path to your HighCharts library source
+	 * @static
+	 * @param $location - path to your highcharts JS
+	 * @return string - html script tag markup with your source location
+	 */
+	public static function setHighChartsLocation($location){
+		return $scriptTag = "<!-- High Roller - High Charts Location-->
+			<script type='text/javascript' src='" . $location . "'></script>";
+	}
 
-  /** returns a javascript script tag with path to your HighCharts library source
-   * @static
-   * @param $location - path to your highcharts JS
-   * @return string - html script tag markup with your source location
-   */
-  public static function setHighChartsLocation($location){
-    return $scriptTag = "<!-- High Roller - High Charts Location-->
-  <script type='text/javascript' src='" . $location . "'></script>";
+	/** returns a javascript script tag with path to your HighCharts library THEME source
+	 * @static
+	 * @param $location - path to your highcharts theme file
+	 * @return string - html script tag markup with your source location
+	 */
+	public static function setHighChartsThemeLocation($location){
+		return $scriptTag = "<!-- High Roller - High Charts Theme Location-->
+		<script type='text/javascript' src='" . $location . "'></script>";
+	}
 
-  }
+	/** returns chart object with newly set obj property name
+	 * @param $objName - string, name of the HighRoller Object you're operating on
+	 * @param $propertyName - string, name of the property you want to set, can be a new property name
+	 * @param $value - mixed, value you wish to assign to the property
+	 * @return HighRoller
+	 */
+	public function setProperty($objName, $propertyName, $value){
+		$this->$objName->$propertyName = $value;
+		return $this;
+	}
 
-  /** returns a javascript script tag with path to your HighCharts library THEME source
-   * @static
-   * @param $location - path to your highcharts theme file
-   * @return string - html script tag markup with your source location
-   */
-  public static function setHighChartsThemeLocation($location){
-    return $scriptTag = "<!-- High Roller - High Charts Theme Location-->
-  <script type='text/javascript' src='" . $location . "'></script>";
+	/** add data to plot in your chart
+	 * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
+	 * @return void
+	 */
+	public function addData($chartdata){
+		if(!is_array($chartdata)){
+			die("HighRoller::addData() - data format must be an array.");
+		}
+		$this->series = array($chartdata);
+	}
 
-  }
+	/** add series to your chart
+	 * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
+	 * @return void
+	 */
+	public function addSeries(HighRollerSeries $chartData){
+		if(is_object($this->series)){     // if series is an object
+			$this->series = array($chartData);
+		} else if(is_array($this->series)) {
+			$this->series[] = $chartData;
+		}
+	}
 
-  /** returns chart object with newly set obj property name
-   * @param $objName - string, name of the HighRoller Object you're operating on
-   * @param $propertyName - string, name of the property you want to set, can be a new property name
-   * @param $value - mixed, value you wish to assign to the property
-   * @return HighRoller
-   */
-  public function setProperty($objName, $propertyName, $value){
-    $this->$objName->$propertyName = $value;
-    return $this;
-  }
+	/** enable auto-step calc for xAxis labels for very large data sets.
+	* @return void
+	*/
+	public function enableAutoStep(){
+		if(is_array($this->series)) {
+			$count = count($this->series[0]->data);
+			$step = number_format(sqrt($count));
+			if($count > 1000){
+				$step = number_format(sqrt($count/$step));
+			}
+			$this->xAxis->labels->step = $step;
+		}
+	}
 
-  /** add data to plot in your chart
-   * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
-   * @return void
-   */
-  public function addData($chartdata){
-    if(!is_array($chartdata)){
-      die("HighRoller::addData() - data format must be an array.");
-    }
-    $this->series = array($chartdata);
-  }
+	/** returns new Highcharts javascript
+	* @return string - highcharts!
+	*/
+	function renderChart($engine = 'jquery'){
+		$options = new HighRollerOptions();   // change file/class name to new HighRollerGlobalOptions()
 
-  /** add series to your chart
-   * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
-   * @return void
-   */
-  public function addSeries($chartData){
-    if(!is_object($chartData)){
-      die("HighRoller::addSeries() - series input format must be an object.");
-    }
+		if ( $engine == 'mootools')
+			$chartJS = 'window.addEvent(\'domready\', function() {';
+		else
+			$chartJS = '$(document).ready(function() {';
 
-    if(is_object($this->series)){   // if series is an object
-      $this->series = array($chartData);
-    } else if(is_array($this->series)) {                        // else
-      array_push($this->series, $chartData);
-    }
-  }
+		$chartJS .= "\n\n    // HIGHROLLER - HIGHCHARTS UTC OPTIONS ";
 
-  /** enable auto-step calc for xAxis labels for very large data sets.
-   * @return void
-   */
-  public function enableAutoStep(){
+		$chartJS .= "\n    Highcharts.setOptions(\n";
+		$chartJS .= "       " . json_encode($options) . "\n";
+		$chartJS .= "    );\n";
+		$chartJS .= "\n\n    // HIGHROLLER - HIGHCHARTS '" . $this->title->text . "' " . $this->chart->type . " chart";
+		//options var
+		$chartJS .= "\n    var ". $this->chart->renderTo . "ChartOptions = " . $this->getChartOptionsObject() .";";
 
-    if(is_array($this->series)) {
-      $count = count($this->series[0]->data);
-      $step = number_format(sqrt($count));
-      if($count > 1000){
-        $step = number_format(sqrt($count/$step));
-      }
+		//formatters
+		//$chartJS .= "\n    " . $this->chart->renderTo . "ChartOptions.tooltip.formatter = function() { return '<b> OLAA </b>'; };"; //example
+		if ($this->tooltip->formatter != ""){
+			$chartJS .= "\n    " . $this->chart->renderTo . "ChartOptions.tooltip.formatter = function() { " . $this->tooltip->formatter . " };"; //example
+		}
 
-      $this->xAxis->labels->step = $step;
-    }
+		// too generalize
+		if ($this->chart->type == 'pie'){
+			if ($this->plotOptions->pie->dataLabels->formatter != ""){
+				$chartJS .= "\n    " . $this->chart->renderTo . "ChartOptions.plotOptions.pie.dataLabels.formatter = function() { " . $this->plotOptions->pie->dataLabels->formatter . " };"; //example
+			}
+		}
 
-  }
+		//rendered
+		$chartJS .= "\n    var " . $this->chart->renderTo . " = new Highcharts.Chart(\n";
+		$chartJS .= "       " . $this->chart->renderTo . "ChartOptions\n";
+		$chartJS .= "    );\n";
+		$chartJS .= "\n  });\n";
+		return trim($chartJS);
+	}
 
-  /** returns new Highcharts javascript
-   * @return string - highcharts!
-   */
-  function renderChart($engine = 'jquery'){
-    $options = new HighRollerOptions();   // change file/class name to new HighRollerGlobalOptions()
+	/** returns HighRoller Object in a filtered array. No null or empty arrays are shown
+	* @return array - filtered object to array
+	*/
+	private function toArray($obj) {
+		$arrObj = is_object($obj) ? get_object_vars($obj) : $obj;
 
-    if ( $engine == 'mootools')
-      $chartJS = 'window.addEvent(\'domready\', function() {';
-    else
-      $chartJS = '$(document).ready(function() {';
+		foreach ($arrObj as $key => $val) {
+			$val = (is_array($val) || is_object($val)) ? $this->toArray($val) : $val;
+			// tests if val empty, and then do some exceptions
+			if(!empty($val) || ($val === false) || ($val === 0))
+				$arr[$key] = $val;
+		}
 
-    $chartJS .= "\n\n    // HIGHROLLER - HIGHCHARTS UTC OPTIONS ";
+		return (isset($arr)) ? $arr : NULL;
+	}
 
-    $chartJS .= "\n    Highcharts.setOptions(\n";
-    $chartJS .= "       " . json_encode($options) . "\n";
-    $chartJS .= "    );\n";
-    $chartJS .= "\n\n    // HIGHROLLER - HIGHCHARTS '" . $this->title->text . "' " . $this->chart->type . " chart";
-    //options var
-    $chartJS .= "\n    var ". $this->chart->renderTo . "ChartOptions = " . $this->getChartOptionsObject() .";";
+	/** returns valid Highcharts javascript object containing your HighRoller options, for manipulation between the markup script tags on your page`
+	* @return string - highcharts options object!
+	*/
+	function getChartOptionsObject(){
+		$array = $this->toArray($this);
+		return trim(json_encode($array));
+	}
 
-    //formatters
-    //$chartJS .= "\n    " . $this->chart->renderTo . "ChartOptions.tooltip.formatter = function() { return '<b> OLAA </b>'; };"; //example
-    if ($this->tooltip->formatter != ""){
-      $chartJS .= "\n    " . $this->chart->renderTo . "ChartOptions.tooltip.formatter = function() { " . $this->tooltip->formatter . " };"; //example
-    }
-
-    if ($this->chart->type == 'pie'){
-      if ($this->plotOptions->pie->dataLabels->formatter != ""){
-        $chartJS .= "\n    " . $this->chart->renderTo . "ChartOptions.plotOptions.pie.dataLabels.formatter = function() { " . $this->plotOptions->pie->dataLabels->formatter . " };"; //example
-      }
-    }
-
-
-    //rendered
-    $chartJS .= "\n    var " . $this->chart->renderTo . " = new Highcharts.Chart(\n";
-    $chartJS .= "       " . $this->chart->renderTo . "ChartOptions\n";
-    $chartJS .= "    );\n";
-    $chartJS .= "\n  });\n";
-    return trim($chartJS);
-  }
-
-  /** returns HighRoller Object in a filtered array. No null or empty arrays are shown
-   * @return array - filtered object to array
-   */
-  private function toArray($obj) {
-    $arrObj = is_object($obj) ? get_object_vars($obj) : $obj;
-
-    foreach ($arrObj as $key => $val) {
-      $val = (is_array($val) || is_object($val)) ? $this->toArray($val) : $val;
-      // tests if val is false due to some boolean options
-      if(!empty($val) || ($val === false) || ($val === 0))
-        $arr[$key] = $val;
-    }
-
-    return (isset($arr)) ? $arr : NULL;
-  }
-
-  /** returns valid Highcharts javascript object containing your HighRoller options, for manipulation between the markup script tags on your page`
-   * @return string - highcharts options object!
-   */
-  function getChartOptionsObject(){
-    $array = $this->toArray($this);
-    return trim(json_encode($array));
-  }
-
-  /** returns new Highcharts.Chart() using your $varname
-   * @param $varname - name of your javascript object holding getChartOptionsObject()
-   * @return string - a new Highcharts.Chart() object with the highroller chart options object
-   */
-  function renderChartOptionsObject($varname){
-    return "new Highcharts.Chart(". $varname . ")";
-  }
-
+	/** returns new Highcharts.Chart() using your $varname
+	* @param $varname - name of your javascript object holding getChartOptionsObject()
+	* @return string - a new Highcharts.Chart() object with the highroller chart options object
+	*/
+	function renderChartOptionsObject($varname){
+		return "new Highcharts.Chart(". $varname . ")";
+	}
 }
 ?><?php
 /**
@@ -247,12 +237,11 @@ class HighRoller {
 
 class HighRollerAxisLabel {
 
-  public $style;
+	public $style;
 
-  function __construct(){
-    $this->style = new HighRollerStyle();
-  }
-
+	function __construct(){
+		$this->style = new HighRollerStyle();
+	}
 }
 ?><?php
 /**
@@ -280,12 +269,11 @@ class HighRollerAxisLabel {
 
 class HighRollerAxisTitle {
 
-  public $style;
+	public $style;
 
-  function __construct(){
-    $this->style = new HighRollerStyle();
-  }
-
+	function __construct(){
+		$this->style = new HighRollerStyle();
+	}
 }
 ?><?php
 /**
@@ -313,12 +301,11 @@ class HighRollerAxisTitle {
 
 class HighRollerBackgroundColors {
 
-  public $linearGradient;
-  public $stops;
-  function __construct(){
+	public $linearGradient;
+	public $stops;
 
-  }
-
+	function __construct(){
+	}
 }
 ?><?php
 /**
@@ -346,14 +333,13 @@ class HighRollerBackgroundColors {
 
 class HighRollerChart {
 
-  public $renderTo;
-//  public $animation;
+	public $renderTo;
+	// public $animation;
 
-  function __construct(){
-    $this->renderTo = null;
-    //$this->animation = new HighRollerChartAnimation();
-  }
-
+	function __construct(){
+		$this->renderTo = null;
+		// $this->animation = new HighRollerChartAnimation();
+	}
 }
 ?><?php
 /**
@@ -381,9 +367,8 @@ class HighRollerChart {
 
 class HighRollerChartAnimation {
 
-  function __construct(){
-  }
-
+	function __construct(){
+	}
 }
 ?>
 <?php
@@ -412,10 +397,8 @@ class HighRollerChartAnimation {
 
 class HighRollerCredits {
 
-  function __construct(){
-
-  }
-
+	function __construct(){
+	}
 }
 ?><?php
 /**
@@ -443,12 +426,11 @@ class HighRollerCredits {
 
 class HighRollerDataLabels {
 
-  public $formatter = "";
+	public $formatter = "";
 
-  function __construct(){
-    $this->style = new HighRollerStyle();
-  }
-
+	function __construct(){
+		$this->style = new HighRollerStyle();
+	}
 }
 ?><?php
 /**
@@ -476,10 +458,8 @@ class HighRollerDataLabels {
 
 class HighRollerDateTimeLabelFormats {
 
-  function __construct(){
-
-  }
-
+	function __construct(){
+	}
 }
 ?><?php
 /**
@@ -507,12 +487,11 @@ class HighRollerDateTimeLabelFormats {
 
 class HighRollerEngine {
 
-  public $type;
+	public $type;
 
-  function __construct(){
-    $this->type = "jquery";
-  }
-
+	function __construct(){
+		$this->type = "jquery";
+	}
 }
 ?><?php
 /**
@@ -540,12 +519,11 @@ class HighRollerEngine {
 
 class HighRollerFormatter {
 
-  public $formatter = null;
+	public $formatter = null;
 
-  function __construct(){
-    //$this->formatter = "";
-  }
-
+	function __construct(){
+		// $this->formatter = "";
+	}
 }
 ?>
 <?php
@@ -574,14 +552,13 @@ class HighRollerFormatter {
 
 class HighRollerLegend {
 
-  public $style;
-  public $backgroundColor;
-  public $enabled = true;
+	public $style;
+	public $backgroundColor;
+	public $enabled = true;
 
-  function __construct(){
-    $this->style = new HighRollerStyle();
-  }
-
+	function __construct(){
+		$this->style = new HighRollerStyle();
+	}
 }
 ?><?php
 /**
@@ -609,12 +586,11 @@ class HighRollerLegend {
 
 class HighRollerOptions {
 
-  public $global;
+	public $global;
 
-  function __construct(){
-    $this->global = new HighRollerOptionsGlobal();
-  }
-
+	function __construct(){
+		$this->global = new HighRollerOptionsGlobal();
+	}
 }
 ?><?php
 /**
@@ -642,47 +618,12 @@ class HighRollerOptions {
 
 class HighRollerOptionsGlobal {
 
-  public $useUTC;
+	public $useUTC;
 
-  function __construct(){
-    $this->useUTC = true;
-  }
-
+	function __construct(){
+	}
 }
 ?><?php
-/**
- * Author: jmac
- * Date: 9/21/11
- * Time: 11:13 PM
- * Desc: HighRoller Plot Lines
- *
- * Licensed to Gravity.com under one or more contributor license agreements.
- * See the NOTICE file distributed with this work for additional information
- * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
- * file except in compliance with the License.  You may obtain a copy of the
- * License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an AS IS BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-class HighRollerPlotLines {
-
-  function __construct(){
-    $this->label = new HighRollerAxisLabel();
-  }
-
-}
-?>
-
-<?php
 /**
  * Author: jmac
  * Date: 9/23/11
@@ -708,20 +649,18 @@ class HighRollerPlotLines {
 
 class HighRollerPlotOptions {
 
-  public $series;
+	public $series;
 
-  function __construct($chartType){
-
-    $this->series = new HighRollerPlotOptionsSeriesOptions();
-    if($chartType == 'area'){ $this->area = new HighRollerPlotOptionsByChartType(); }
-    else if($chartType == 'bar'){ $this->bar = new HighRollerPlotOptionsByChartType(); }
-    else if($chartType == 'column'){ $this->column = new HighRollerPlotOptionsByChartType(); }
-    else if($chartType == 'line'){ $this->line = new HighRollerPlotOptionsByChartType(); }
-    else if($chartType == 'pie'){ $this->pie = new HighRollerPlotOptionsByChartType(); }
-    else if($chartType == 'scatter'){ $this->scatter = new HighRollerPlotOptionsByChartType(); }
-    else if($chartType == 'spline'){ $this->spline = new HighRollerPlotOptionsByChartType(); }
-  }
-
+	function __construct($chartType){
+		$this->series = new HighRollerPlotOptionsSeriesOptions();
+		if($chartType == 'area'){ $this->area = new HighRollerPlotOptionsByChartType(); }
+		else if($chartType == 'bar'){ $this->bar = new HighRollerPlotOptionsByChartType(); }
+		else if($chartType == 'column'){ $this->column = new HighRollerPlotOptionsByChartType(); }
+		else if($chartType == 'line'){ $this->line = new HighRollerPlotOptionsByChartType(); }
+		else if($chartType == 'pie'){ $this->pie = new HighRollerPlotOptionsByChartType(); }
+		else if($chartType == 'scatter'){ $this->scatter = new HighRollerPlotOptionsByChartType(); }
+		else if($chartType == 'spline'){ $this->spline = new HighRollerPlotOptionsByChartType(); }
+	}
 }
 ?><?php
 /**
@@ -749,13 +688,12 @@ class HighRollerPlotOptions {
 
 class HighRollerPlotOptionsByChartType {
 
-  public $dataLabels;
-  public $formatter = "";
+	public $dataLabels;
+	public $formatter = "";
 
-  function __construct(){
-    $this->dataLabels = new HighRollerDataLabels();
-  }
-
+	function __construct(){
+		$this->dataLabels = new HighRollerDataLabels();
+	}
 }
 ?><?php
 /**
@@ -783,20 +721,58 @@ class HighRollerPlotOptionsByChartType {
 
 class HighRollerSeries {
 
-  public $name;
-  public $data = array();
+	public $name;
+	public $data = array();
 
-  function __construct(){
-  }
+	function __construct(){
+	}
 
-  /** add data to your series data
-  * @param $chartdata - array or HighRollerSeriesData
-  * @return void
-  */
-  public function addData($chartdata){
-    $this->data[] = $chartdata;
-  }
+	/** add data to your series data
+	* @param $chartdata - array or HighRollerSeriesData
+	* @return void
+	*/
+	public function addData($chartdata){
+		$this->data[] = $chartdata;
+	}
 }
+?><?php
+/**
+ * Author: jmac
+ * Date: 9/21/11
+ * Time: 1:11 PM
+ * Desc: HighRoller Series Data Class
+ *
+ * Licensed to Gravity.com under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information
+ * regarding copyright ownership.  Gravity.com licenses this file to you use
+ * under the Apache License, Version 2.0 (the License); you may not this
+ * file except in compliance with the License.  You may obtain a copy of the
+ * License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+class HighRollerSeriesData {
+
+	public $name;
+	public $data = array();
+
+	/** add data to your series data
+	* @param $chartdata - array or HighRollerSeriesData
+	* @return void
+	*/
+	public function addData($chartdata){
+		$this->data[] = $chartdata;
+	}
+}
+
 ?><?php
 /**
  * Author: jmac
@@ -823,13 +799,12 @@ class HighRollerSeries {
 
 class HighRollerPlotOptionsSeriesOptions {
 
-  public $dataLabels;
-  public $stacking = null;
+	public $dataLabels;
+	public $stacking = null;
 
-  function __construct(){
-    $this->dataLabels = new HighRollerDataLabels();
-  }
-
+	function __construct(){
+		$this->dataLabels = new HighRollerDataLabels();
+	}
 }
 ?><?php
 /**
@@ -857,9 +832,8 @@ class HighRollerPlotOptionsSeriesOptions {
 
 class HighRollerStyle {
 
-  function __construct(){
-
-  }
+	function __construct(){
+	}
 }
 ?><?php
 /**
@@ -887,13 +861,12 @@ class HighRollerStyle {
 
 class HighRollerTitle {
 
-  public $text;
-//  public $style;
+	public $text;
+	// public $style;
 
-  function __construct(){
-//    $this->style = new HighRollerStyle();
-  }
-
+	function __construct(){
+		// $this->style = new HighRollerStyle();
+	}
 }
 ?><?php
 /**
@@ -921,14 +894,88 @@ class HighRollerTitle {
 
 class HighRollerToolTip {
 
-  public $backgroundColor = '#FFFFFF';
-  public $formatter = "";
+	public $backgroundColor = '#FFFFFF';
+	public $formatter = "";
 
-  function __construct(){
-  }
+	function __construct(){
+	}
 }
-?>
-<?php
+?><?php
+/**
+ * Author: jmac
+ * Date: 9/21/11
+ * Time: 11:13 PM
+ * Desc: HighRoller Plot Lines
+ *
+ * Licensed to Gravity.com under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information
+ * regarding copyright ownership.  Gravity.com licenses this file to you use
+ * under the Apache License, Version 2.0 (the License); you may not this
+ * file except in compliance with the License.  You may obtain a copy of the
+ * License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+class HighRollerPlotLines {
+
+	public $color = '#aa4643';
+	public $width = 3;
+	public $value;
+
+	function __construct(){
+	}
+}
+?><?php
+/**
+ * Author: jfloff
+ * Date: 12/16/12
+ * Time: 13:00 PM
+ * Desc: HighRoller Abstract Axis Class
+ *
+ * Licensed to Gravity.com under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information
+ * regarding copyright ownership.  Gravity.com licenses this file to you use
+ * under the Apache License, Version 2.0 (the License); you may not this
+ * file except in compliance with the License.  You may obtain a copy of the
+ * License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+abstract class HighRollerAxis {
+
+	public $labels;
+	public $title;
+	public $categories = array();
+	public $type;
+	public $tickInterval;
+	public $plotLines = array();	// @TODO instantiating a new plotLines object isn't working, setting as an array
+
+	function __construct(){
+		$this->title = new HighRollerAxisTitle();
+		$this->dateTimeLabelFormats = new HighRollerDateTimeLabelFormats();
+	}
+
+	public function addPlotLines(HighRollerPlotLines $plotLines) {
+		$this->plotLines[] = $plotLines;
+	}
+}
+?><?php
 /**
  * Author: jmac
  * Date: 9/21/11
@@ -952,21 +999,12 @@ class HighRollerToolTip {
  *
  */
 
-class HighRollerXAxis {
+class HighRollerXAxis extends HighRollerAxis {
 
-  public $labels;
-  public $title;
-  public $categories = array();
-  public $type;
-  public $tickInterval;
-  public $plotLines = array();    // @TODO instantiating a new plotLines object isn't working, setting as an array
-
-  function __construct(){
-    $this->labels = new HighRollerXAxisLabels();
-    $this->title = new HighRollerAxisTitle();
-    $this->dateTimeLabelFormats = new HighRollerDateTimeLabelFormats();
-  }
-
+	function __construct(){
+		parent::__construct();
+		$this->labels = new HighRollerXAxisLabels();
+	}
 }
 ?><?php
 /**
@@ -994,12 +1032,11 @@ class HighRollerXAxis {
 
 class HighRollerXAxisLabels {
 
-  public $style;
+	public $style;
 
-  function __construct(){
-    $this->style = new HighRollerStyle();
-  }
-
+	function __construct(){
+		$this->style = new HighRollerStyle();
+	}
 }
 ?><?php
 /**
@@ -1025,17 +1062,10 @@ class HighRollerXAxisLabels {
  *
  */
 
-class HighRollerYAxis {
+class HighRollerYAxis extends HighRollerAxis {
 
-  public $labels;
-  public $title;
-  public $plotLines = array();    // @TODO instantiating a new plotLines object isn't working, setting as an array
-
-  function __construct(){
-    $this->labels = new HighRollerAxisLabel();
-    $this->title = new HighRollerAxisTitle();
-    $this->plotLines = array();   // @TODO need to revisit why declaring this as an empty class or a hydrated class isn't working    $this->dateTimeLabelFormats = new HighRollerDateTimeLabelFormats();
-  }
-
+	function __construct(){
+		parent::__construct();
+	}
 }
 ?>

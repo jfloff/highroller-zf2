@@ -24,13 +24,12 @@
 
 class HighRollerSplineChart extends HighRoller {
 
-  function __construct(){
-    parent::__construct();
-    $this->chart->type = 'spline';
-//    $this->xAxis = new HighRollerXAxis();
-//    $this->yAxis = new HighRollerYAxis();
-//    $this->plotOptions->spline = new HighRollerPlotOptionsByChartType($this->chart->type);
+	function __construct(){
+		parent::__construct();
+		$this->chart->type = 'spline';
+		$this->xAxis = new HighRollerXAxis();
+		$this->yAxis = new HighRollerYAxis();
+		$this->initPlotOptions();
   }
-
 }
 ?>

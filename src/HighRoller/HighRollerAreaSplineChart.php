@@ -24,13 +24,12 @@
 
 class HighRollerAreaSplineChart extends HighRoller {
 
-  function __construct(){
-    parent::__construct();
-    $this->chart->type = 'areaspline';
-//    $this->xAxis = new HighRollerXAxis();
-//    $this->yAxis = new HighRollerYAxis();
-//    $this->plotOptions->areaspline = new HighRollerPlotOptionsByChartType($this->chart->type);
+	function __construct(){
+		parent::__construct();
+		$this->chart->type = 'areaspline';
+		$this->xAxis = new HighRollerXAxis();
+		$this->yAxis = new HighRollerYAxis();
+		$this->initPlotOptions();
   }
-
 }
 ?>

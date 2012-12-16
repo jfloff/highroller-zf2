@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Author: jmac
  * Date: 9/14/11
@@ -25,15 +24,12 @@
 
 class HighRollerColumnChart extends HighRoller {
 
-  function __construct(){
-    parent::__construct();
-
-    $this->chart->type = 'column';
-
-	$this->xAxis = new HighRollerXAxis();
-	$this->yAxis = new HighRollerYAxis();
-
-	$this->initPlotOptions();
-  }
+	function __construct(){
+		parent::__construct();
+		$this->chart->type = 'column';
+		$this->xAxis = new HighRollerXAxis();
+		$this->yAxis = new HighRollerYAxis();
+		$this->initPlotOptions();
+	}
 }
 ?>
