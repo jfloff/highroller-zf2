@@ -650,16 +650,25 @@ class HighRollerOptionsGlobal {
 class HighRollerPlotOptions {
 
 	public $series;
+	public $area = NULL;
+	public $bar = NULL;
+	public $column = NULL;
+	public $line = NULL;
+	public $pie = NULL;
+	public $scatter = NULL;
+	public $spline = NULL;
 
 	function __construct($chartType){
 		$this->series = new HighRollerPlotOptionsSeriesOptions();
-		if($chartType == 'area'){ $this->area = new HighRollerPlotOptionsByChartType(); }
-		else if($chartType == 'bar'){ $this->bar = new HighRollerPlotOptionsByChartType(); }
-		else if($chartType == 'column'){ $this->column = new HighRollerPlotOptionsByChartType(); }
-		else if($chartType == 'line'){ $this->line = new HighRollerPlotOptionsByChartType(); }
-		else if($chartType == 'pie'){ $this->pie = new HighRollerPlotOptionsByChartType(); }
-		else if($chartType == 'scatter'){ $this->scatter = new HighRollerPlotOptionsByChartType(); }
-		else if($chartType == 'spline'){ $this->spline = new HighRollerPlotOptionsByChartType(); }
+		switch ($chartType) {
+			case 'area': 	$this->area = new HighRollerPlotOptionsByChartType(); break;
+			case 'bar':  	$this->bar = new HighRollerPlotOptionsByChartType(); break;
+			case 'column':	$this->column = new HighRollerPlotOptionsByChartType(); break;
+			case 'line':  	$this->line = new HighRollerPlotOptionsByChartType(); break;
+			case 'pie':  	$this->pie = new HighRollerPlotOptionsByChartType(); break;
+			case 'scatter': $this->scatter = new HighRollerPlotOptionsByChartType(); break;
+			case 'spline':  $this->spline = new HighRollerPlotOptionsByChartType(); break;
+		}
 	}
 }
 ?><?php
@@ -690,9 +699,152 @@ class HighRollerPlotOptionsByChartType {
 
 	public $dataLabels;
 	public $formatter = "";
+	public $pointPadding;
 
 	function __construct(){
 		$this->dataLabels = new HighRollerDataLabels();
+	}
+}
+?><?php
+/**
+ * Author: jfloff
+ * Date: 12/24/12
+ * Time: 15:30 PM
+ * Desc: HighRoller Select Class
+ *
+ * Licensed to Gravity.com under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information
+ * regarding copyright ownership.  Gravity.com licenses this file to you use
+ * under the Apache License, Version 2.0 (the License); you may not this
+ * file except in compliance with the License.  You may obtain a copy of the
+ * License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+class HighRollerSelect {
+
+	public $enabled;
+	public $fillColor;
+	public $lineColor;
+	public $lineWidth;
+	public $radius;
+
+	function __construct(){
+	}
+}
+?><?php
+/**
+ * Author: jfloff
+ * Date: 12/24/12
+ * Time: 15:30 PM
+ * Desc: HighRoller Hover Class
+ *
+ * Licensed to Gravity.com under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information
+ * regarding copyright ownership.  Gravity.com licenses this file to you use
+ * under the Apache License, Version 2.0 (the License); you may not this
+ * file except in compliance with the License.  You may obtain a copy of the
+ * License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+class HighRollerHover {
+
+	public $enabled;
+	public $fillColor;
+	public $lineColor;
+	public $lineWidth;
+	public $radius;
+
+	function __construct(){
+	}
+}
+?><?php
+/**
+ * Author: jfloff
+ * Date: 12/24/12
+ * Time: 15:30 PM
+ * Desc: HighRoller States Class
+ *
+ * Licensed to Gravity.com under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information
+ * regarding copyright ownership.  Gravity.com licenses this file to you use
+ * under the Apache License, Version 2.0 (the License); you may not this
+ * file except in compliance with the License.  You may obtain a copy of the
+ * License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+class HighRollerStates {
+
+	public $hover;
+	public $select;
+
+	function __construct(){
+		$this->hover = new HighRollerHover();
+		$this->select = new HighRollerSelect();
+	}
+}
+?><?php
+/**
+ * Author: jfloff
+ * Date: 12/24/12
+ * Time: 15:30 PM
+ * Desc: HighRoller Marker Class
+ *
+ * Licensed to Gravity.com under one or more contributor license agreements.
+ * See the NOTICE file distributed with this work for additional information
+ * regarding copyright ownership.  Gravity.com licenses this file to you use
+ * under the Apache License, Version 2.0 (the License); you may not this
+ * file except in compliance with the License.  You may obtain a copy of the
+ * License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an AS IS BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+class HighRollerMarker {
+
+	public $enabled;
+	public $fillColor;
+	public $lineColor;
+	public $lineWidth;
+	public $radius;
+	public $states;
+	public $symbol;
+
+	function __construct(){
+		$this->states = new HighRollerStates();
 	}
 }
 ?><?php
@@ -723,8 +875,10 @@ class HighRollerSeries {
 
 	public $name;
 	public $data = array();
+	public $marker;
 
 	function __construct(){
+		$this->marker = new HighRollerMarker();
 	}
 
 	/** add data to your series data
