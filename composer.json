@@ -1,33 +1,30 @@
 {
     "name": "jfloff/highroller-zf2",
-    "description": "A Highcharts module for Zend Framework 2 based on jmaclabs HighRoller.",
+    "description": "Highcharts module for Zend Framework 2 based on HighRoller.",
     "license": "Apache-2.0",
     "type": "library",
     "keywords": [
-        "zf2",
-        "highroller",
         "highcharts",
+        "highroller",
+        "zf2",
         "zend framework 2"
     ],
     "homepage": "https://github.com/jfloff/highroller-zf2",
     "authors": [
         {
-            "name": "João Loff",
+            "name": "Joao Loff",
             "email": "jfloff@gmail.com",
-            "homepage": "http://github.com/jfloff"
+            "homepage": "http://jfloff.github.com/"
         }
     ],
     "require": {
-        "php": ">=5.3",
-        "zendframework/zendframework": "2.*",
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.0.*",
         "rwoverdijk/assetmanager": "1.*"
     },
     "autoload": {
         "psr-0": {
             "HighRoller": "src/"
-        },
-        "classmap": [
-            "./Module.php"
-        ]
+        }
     }
 }
