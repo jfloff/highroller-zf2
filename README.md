@@ -22,8 +22,7 @@ Installation
 1. Require this project using composer:
 
     ```sh
-    ./composer.phar require jfloff/highroller-zf2
-    #when asked for a version, type "1.*".
+    ./composer.phar require jfloff/highroller-zf2:dev-master
     ```
 
 #### Post installation
