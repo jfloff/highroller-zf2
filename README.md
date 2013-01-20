@@ -17,12 +17,11 @@ Installation
 
 ### Main Setup
 
-#### With composer
-
-1. Require this project using composer:
+Require this project using composer:
 
     ```sh
-    ./composer.phar require jfloff/highroller-zf2:dev-master
+    ./composer.phar require jfloff/highroller-zf2
+    # When asked for a version, type: "1.*"
     ```
 
 #### Post installation
