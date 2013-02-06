@@ -17,11 +17,12 @@ Installation
 
 ### Main Setup
 
-Require this project using composer:
+#### With composer
+
+1. Require this project using composer:
 
     ```sh
-    ./composer.phar require jfloff/highroller-zf2
-    # When asked for a version, type: "1.*"
+    ./composer.phar require jfloff/highroller-zf2:dev-master
     ```
 
 #### Post installation
@@ -76,8 +77,9 @@ Open `module/Application/src/Application/Controller/IndexController.php`.
 Open `module/Application/view/application/index/index.phtml`
 
 1. Include highcharts.js file (you could also do this in your layout):
-    ```phtml
-    <?php echo $this->headScript()->prependFile($this->basePath() . '/js/highcharts.js'); ?>
+    ```html
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
     ```
 
 2. At the top of the file:
@@ -102,11 +104,9 @@ Licensing
 ------------
 HighRoller is licensed by Gravity.com under the Apache 2.0 license, see the LICENSE file for more details.
 
-HighRoller comes with a copy of Highcharts.
-
 HighCharts is licensed by Highsoft Solutions AS.
 
 Highcharts is licensed for free for any personal or non-profit projects under the [Creative Commons Attribution-NonCommercial
 3.0 License] (http://creativecommons.org/licenses/by-nc/3.0/).
 
-[See the license and pricing details directly on the Highcharts.com site for more details.] (http://www.highcharts.com/license)
+[See the license and pricing details directly on the Highcharts.com site for more details.](http://www.highcharts.com/license)
