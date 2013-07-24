@@ -24,7 +24,7 @@
 
 namespace HighRoller;
 
-class HighRollerPieChart extends HighRoller {
+class HighRollerPieChart extends ChartAbstract {
 
 	function __construct(){
 		parent::__construct();

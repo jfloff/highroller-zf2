@@ -4,7 +4,7 @@
 * HighRoller -- PHP wrapper for the popular JS charting library Highcharts
 * Author:       jmaclabs@gmail.com
 * Contributor:	jfloff@gmail.com
-* File:         HighRoller.php
+* File:         ChartAbstract.php
 * Date:         Mon Aug 13 14:23:49 WEST 2012
 * Version:      1.0.0
 *
@@ -50,7 +50,7 @@
 
 namespace HighRoller;
 
-class HighRoller {
+class ChartAbstract {
 
 	public $chart;
 	public $title;
@@ -93,10 +93,10 @@ class HighRoller {
 	}
 
 	/** returns chart object with newly set obj property name
-	 * @param $objName - string, name of the HighRoller Object you're operating on
+	 * @param $objName - string, name of the ChartAbstract Object you're operating on
 	 * @param $propertyName - string, name of the property you want to set, can be a new property name
 	 * @param $value - mixed, value you wish to assign to the property
-	 * @return HighRoller
+	 * @return ChartAbstract
 	 */
 	public function setProperty($objName, $propertyName, $value){
 		$this->$objName->$propertyName = $value;
@@ -109,7 +109,7 @@ class HighRoller {
 	 */
 	public function addData($chartdata){
 		if(!is_array($chartdata)){
-			die("HighRoller::addData() - data format must be an array.");
+			die("ChartAbstract::addData() - data format must be an array.");
 		}
 		$this->series = array($chartdata);
 	}
@@ -181,7 +181,7 @@ class HighRoller {
 		return trim($chartJS);
 	}
 
-	/** returns HighRoller Object in a filtered array. No null or empty arrays are shown
+	/** returns ChartAbstract Object in a filtered array. No null or empty arrays are shown
 	* @return array - filtered object to array
 	*/
 	private function toArray($obj) {
@@ -197,7 +197,7 @@ class HighRoller {
 		return (isset($arr)) ? $arr : NULL;
 	}
 
-	/** returns valid Highcharts javascript object containing your HighRoller options, for manipulation between the markup script tags on your page`
+	/** returns valid Highcharts javascript object containing your ChartAbstract options, for manipulation between the markup script tags on your page`
 	* @return string - highcharts options object!
 	*/
 	function getChartOptionsObject(){
