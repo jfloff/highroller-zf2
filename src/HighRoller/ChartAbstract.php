@@ -4,14 +4,14 @@
 * HighRoller -- PHP wrapper for the popular JS charting library Highcharts
 * Author:       jmaclabs@gmail.com
 * Contributor:	jfloff@gmail.com
-* File:         HighRoller.php
+* File:         ChartAbstract.php
 * Date:         Mon Aug 13 14:23:49 WEST 2012
 * Version:      1.0.0
 *
 * Licensed to Gravity.com under one or more contributor license agreements.
 * See the NOTICE file distributed with this work for additional information
 * regarding copyright ownership.  Gravity.com licenses this file to you use
-* under the Apache License, Version 2.0 (the License); you may not this
+* under the Apache License, Version 2.0 (the License); you may not use this
 * file except in compliance with the License.  You may obtain a copy of the
 * License at
 *
@@ -34,7 +34,7 @@
 * Licensed to Gravity.com under one or more contributor license agreements.
 * See the NOTICE file distributed with this work for additional information
 * regarding copyright ownership.  Gravity.com licenses this file to you use
-* under the Apache License, Version 2.0 (the License); you may not this
+* under the Apache License, Version 2.0 (the License); you may not use this
 * file except in compliance with the License.  You may obtain a copy of the
 * License at
 *
@@ -48,7 +48,9 @@
 *
 */
 
-class HighRoller {
+namespace HighRoller;
+
+class ChartAbstract {
 
 	public $chart;
 	public $title;
@@ -58,16 +60,16 @@ class HighRoller {
 	public $series = array();
 
 	function __construct(){
-		$this->chart = new HighRollerChart();
-		$this->title = new HighRollerTitle();
-		$this->legend = new HighRollerLegend();
-		$this->tooltip = new HighRollerToolTip();
-		$this->series = new HighRollerSeries();
+		$this->chart = new Chart();
+		$this->title = new Title();
+		$this->legend = new Legend();
+		$this->tooltip = new ToolTip();
+		$this->series = new Series();
 	}
 
 	function initPlotOptions(){
-		$this->plotOptions = new HighRollerPlotOptions($this->chart->type);
-		//$this->plotOptions->column = new HighRollerPlotOptionsByChartType($this->chart->type);
+		$this->plotOptions = new PlotOptions($this->chart->type);
+		//$this->plotOptions->column = new PlotOptionsByChartType($this->chart->type);
 	}
 
 	/** returns a javascript script tag with path to your HighCharts library source
@@ -91,10 +93,10 @@ class HighRoller {
 	}
 
 	/** returns chart object with newly set obj property name
-	 * @param $objName - string, name of the HighRoller Object you're operating on
+	 * @param $objName - string, name of the ChartAbstract Object you're operating on
 	 * @param $propertyName - string, name of the property you want to set, can be a new property name
 	 * @param $value - mixed, value you wish to assign to the property
-	 * @return HighRoller
+	 * @return ChartAbstract
 	 */
 	public function setProperty($objName, $propertyName, $value){
 		$this->$objName->$propertyName = $value;
@@ -107,7 +109,7 @@ class HighRoller {
 	 */
 	public function addData($chartdata){
 		if(!is_array($chartdata)){
-			die("HighRoller::addData() - data format must be an array.");
+			die("ChartAbstract::addData() - data format must be an array.");
 		}
 		$this->series = array($chartdata);
 	}
@@ -116,7 +118,7 @@ class HighRoller {
 	 * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
 	 * @return void
 	 */
-	public function addSeries(HighRollerSeriesData $chartData){
+	public function addSeries(SeriesData $chartData){
 		if(is_object($this->series)){     // if series is an object
 			$this->series = array($chartData);
 		} else if(is_array($this->series)) {
@@ -142,7 +144,7 @@ class HighRoller {
 	* @return string - highcharts!
 	*/
 	function renderChart($engine = 'jquery'){
-		$options = new HighRollerOptions();   // change file/class name to new HighRollerGlobalOptions()
+		$options = new Options();   // change file/class name to new GlobalOptions()
 
 		if ( $engine == 'mootools')
 			$chartJS = 'window.addEvent(\'domready\', function() {';
@@ -179,7 +181,7 @@ class HighRoller {
 		return trim($chartJS);
 	}
 
-	/** returns HighRoller Object in a filtered array. No null or empty arrays are shown
+	/** returns ChartAbstract Object in a filtered array. No null or empty arrays are shown
 	* @return array - filtered object to array
 	*/
 	private function toArray($obj) {
@@ -195,7 +197,7 @@ class HighRoller {
 		return (isset($arr)) ? $arr : NULL;
 	}
 
-	/** returns valid Highcharts javascript object containing your HighRoller options, for manipulation between the markup script tags on your page`
+	/** returns valid Highcharts javascript object containing your ChartAbstract options, for manipulation between the markup script tags on your page`
 	* @return string - highcharts options object!
 	*/
 	function getChartOptionsObject(){
@@ -221,7 +223,7 @@ class HighRoller {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -235,12 +237,12 @@ class HighRoller {
  *
  */
 
-class HighRollerAxisLabel {
+class AxisLabel {
 
 	public $style;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -253,7 +255,7 @@ class HighRollerAxisLabel {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -267,12 +269,12 @@ class HighRollerAxisLabel {
  *
  */
 
-class HighRollerAxisTitle {
+class AxisTitle {
 
 	public $style;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -285,7 +287,7 @@ class HighRollerAxisTitle {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -299,7 +301,7 @@ class HighRollerAxisTitle {
  *
  */
 
-class HighRollerBackgroundColors {
+class BackgroundColors {
 
 	public $linearGradient;
 	public $stops;
@@ -317,7 +319,7 @@ class HighRollerBackgroundColors {
  *  Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -331,14 +333,14 @@ class HighRollerBackgroundColors {
  *
  */
 
-class HighRollerChart {
+class Chart {
 
 	public $renderTo;
 	// public $animation;
 
 	function __construct(){
 		$this->renderTo = null;
-		// $this->animation = new HighRollerChartAnimation();
+		// $this->animation = new ChartAnimation();
 	}
 }
 ?><?php
@@ -351,7 +353,7 @@ class HighRollerChart {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -365,7 +367,7 @@ class HighRollerChart {
  *
  */
 
-class HighRollerChartAnimation {
+class ChartAnimation {
 
 	function __construct(){
 	}
@@ -381,7 +383,7 @@ class HighRollerChartAnimation {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -395,7 +397,7 @@ class HighRollerChartAnimation {
  *
  */
 
-class HighRollerCredits {
+class Credits {
 
 	function __construct(){
 	}
@@ -410,7 +412,7 @@ class HighRollerCredits {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -424,12 +426,12 @@ class HighRollerCredits {
  *
  */
 
-class HighRollerDataLabels {
+class DataLabels {
 
 	public $formatter = "";
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -442,7 +444,7 @@ class HighRollerDataLabels {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -456,7 +458,7 @@ class HighRollerDataLabels {
  *
  */
 
-class HighRollerDateTimeLabelFormats {
+class DateTimeLabelFormats {
 
 	function __construct(){
 	}
@@ -471,7 +473,7 @@ class HighRollerDateTimeLabelFormats {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -485,7 +487,7 @@ class HighRollerDateTimeLabelFormats {
  *
  */
 
-class HighRollerEngine {
+class Engine {
 
 	public $type;
 
@@ -503,7 +505,7 @@ class HighRollerEngine {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -517,7 +519,7 @@ class HighRollerEngine {
  *
  */
 
-class HighRollerFormatter {
+class Formatter {
 
 	public $formatter = null;
 
@@ -536,7 +538,7 @@ class HighRollerFormatter {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -550,14 +552,14 @@ class HighRollerFormatter {
  *
  */
 
-class HighRollerLegend {
+class Legend {
 
 	public $style;
 	public $backgroundColor;
 	public $enabled = true;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -570,7 +572,7 @@ class HighRollerLegend {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -584,12 +586,12 @@ class HighRollerLegend {
  *
  */
 
-class HighRollerOptions {
+class Options {
 
 	public $global;
 
 	function __construct(){
-		$this->global = new HighRollerOptionsGlobal();
+		$this->global = new OptionsGlobal();
 	}
 }
 ?><?php
@@ -602,7 +604,7 @@ class HighRollerOptions {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -616,7 +618,7 @@ class HighRollerOptions {
  *
  */
 
-class HighRollerOptionsGlobal {
+class OptionsGlobal {
 
 	public $useUTC;
 
@@ -633,7 +635,7 @@ class HighRollerOptionsGlobal {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -647,7 +649,7 @@ class HighRollerOptionsGlobal {
  *
  */
 
-class HighRollerPlotOptions {
+class PlotOptions {
 
 	public $series;
 	public $area = NULL;
@@ -659,15 +661,15 @@ class HighRollerPlotOptions {
 	public $spline = NULL;
 
 	function __construct($chartType){
-		$this->series = new HighRollerPlotOptionsSeriesOptions();
+		$this->series = new PlotOptionsSeriesOptions();
 		switch ($chartType) {
-			case 'area': 	$this->area = new HighRollerPlotOptionsByChartType(); break;
-			case 'bar':  	$this->bar = new HighRollerPlotOptionsByChartType(); break;
-			case 'column':	$this->column = new HighRollerPlotOptionsByChartType(); break;
-			case 'line':  	$this->line = new HighRollerPlotOptionsByChartType(); break;
-			case 'pie':  	$this->pie = new HighRollerPlotOptionsByChartType(); break;
-			case 'scatter': $this->scatter = new HighRollerPlotOptionsByChartType(); break;
-			case 'spline':  $this->spline = new HighRollerPlotOptionsByChartType(); break;
+			case 'area': 	$this->area = new PlotOptionsByChartType(); break;
+			case 'bar':  	$this->bar = new PlotOptionsByChartType(); break;
+			case 'column':	$this->column = new PlotOptionsByChartType(); break;
+			case 'line':  	$this->line = new PlotOptionsByChartType(); break;
+			case 'pie':  	$this->pie = new PlotOptionsByChartType(); break;
+			case 'scatter': $this->scatter = new PlotOptionsByChartType(); break;
+			case 'spline':  $this->spline = new PlotOptionsByChartType(); break;
 		}
 	}
 }
@@ -681,7 +683,7 @@ class HighRollerPlotOptions {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -695,14 +697,14 @@ class HighRollerPlotOptions {
  *
  */
 
-class HighRollerPlotOptionsByChartType {
+class PlotOptionsByChartType {
 
 	public $dataLabels;
 	public $formatter = "";
 	public $pointPadding;
 
 	function __construct(){
-		$this->dataLabels = new HighRollerDataLabels();
+		$this->dataLabels = new DataLabels();
 	}
 }
 ?><?php
@@ -715,7 +717,7 @@ class HighRollerPlotOptionsByChartType {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -729,7 +731,7 @@ class HighRollerPlotOptionsByChartType {
  *
  */
 
-class HighRollerSelect {
+class Select {
 
 	public $enabled;
 	public $fillColor;
@@ -750,7 +752,7 @@ class HighRollerSelect {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -764,7 +766,7 @@ class HighRollerSelect {
  *
  */
 
-class HighRollerHover {
+class Hover {
 
 	public $enabled;
 	public $fillColor;
@@ -785,7 +787,7 @@ class HighRollerHover {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -799,14 +801,14 @@ class HighRollerHover {
  *
  */
 
-class HighRollerStates {
+class States {
 
 	public $hover;
 	public $select;
 
 	function __construct(){
-		$this->hover = new HighRollerHover();
-		$this->select = new HighRollerSelect();
+		$this->hover = new Hover();
+		$this->select = new Select();
 	}
 }
 ?><?php
@@ -819,7 +821,7 @@ class HighRollerStates {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -833,7 +835,7 @@ class HighRollerStates {
  *
  */
 
-class HighRollerMarker {
+class Marker {
 
 	public $enabled;
 	public $fillColor;
@@ -844,7 +846,7 @@ class HighRollerMarker {
 	public $symbol;
 
 	function __construct(){
-		$this->states = new HighRollerStates();
+		$this->states = new States();
 	}
 }
 ?><?php
@@ -857,7 +859,7 @@ class HighRollerMarker {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -871,18 +873,18 @@ class HighRollerMarker {
  *
  */
 
-class HighRollerSeries {
+class Series {
 
 	public $name;
 	public $data = array();
 	public $marker;
 
 	function __construct(){
-		$this->marker = new HighRollerMarker();
+		$this->marker = new Marker();
 	}
 
 	/** add data to your series data
-	* @param $chartdata - array or HighRollerSeriesData
+	* @param $chartdata - array or SeriesData
 	* @return void
 	*/
 	public function addData($chartdata){
@@ -899,7 +901,7 @@ class HighRollerSeries {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -913,13 +915,13 @@ class HighRollerSeries {
  *
  */
 
-class HighRollerSeriesData {
+class SeriesData {
 
 	public $name;
 	public $data = array();
 
 	/** add data to your series data
-	* @param $chartdata - array or HighRollerSeriesData
+	* @param $chartdata - array or SeriesData
 	* @return void
 	*/
 	public function addData($chartdata){
@@ -937,7 +939,7 @@ class HighRollerSeriesData {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -951,13 +953,13 @@ class HighRollerSeriesData {
  *
  */
 
-class HighRollerPlotOptionsSeriesOptions {
+class PlotOptionsSeriesOptions {
 
 	public $dataLabels;
 	public $stacking = null;
 
 	function __construct(){
-		$this->dataLabels = new HighRollerDataLabels();
+		$this->dataLabels = new DataLabels();
 	}
 }
 ?><?php
@@ -970,7 +972,7 @@ class HighRollerPlotOptionsSeriesOptions {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -984,7 +986,7 @@ class HighRollerPlotOptionsSeriesOptions {
  *
  */
 
-class HighRollerStyle {
+class Style {
 
 	function __construct(){
 	}
@@ -999,7 +1001,7 @@ class HighRollerStyle {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1013,13 +1015,13 @@ class HighRollerStyle {
  *
  */
 
-class HighRollerTitle {
+class Title {
 
 	public $text;
 	// public $style;
 
 	function __construct(){
-		// $this->style = new HighRollerStyle();
+		// $this->style = new Style();
 	}
 }
 ?><?php
@@ -1032,7 +1034,7 @@ class HighRollerTitle {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1046,7 +1048,7 @@ class HighRollerTitle {
  *
  */
 
-class HighRollerToolTip {
+class ToolTip {
 
 	public $backgroundColor = '#FFFFFF';
 	public $formatter = "";
@@ -1064,7 +1066,7 @@ class HighRollerToolTip {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1078,7 +1080,7 @@ class HighRollerToolTip {
  *
  */
 
-class HighRollerPlotLines {
+class PlotLines {
 
 	public $color = '#aa4643';
 	public $width = 3;
@@ -1097,7 +1099,7 @@ class HighRollerPlotLines {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1111,7 +1113,7 @@ class HighRollerPlotLines {
  *
  */
 
-abstract class HighRollerAxis {
+abstract class Axis {
 
 	public $labels;
 	public $title;
@@ -1121,11 +1123,11 @@ abstract class HighRollerAxis {
 	public $plotLines = array();	// @TODO instantiating a new plotLines object isn't working, setting as an array
 
 	function __construct(){
-		$this->title = new HighRollerAxisTitle();
-		$this->dateTimeLabelFormats = new HighRollerDateTimeLabelFormats();
+		$this->title = new AxisTitle();
+		$this->dateTimeLabelFormats = new DateTimeLabelFormats();
 	}
 
-	public function addPlotLines(HighRollerPlotLines $plotLines) {
+	public function addPlotLines(PlotLines $plotLines) {
 		$this->plotLines[] = $plotLines;
 	}
 }
@@ -1139,7 +1141,7 @@ abstract class HighRollerAxis {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1153,11 +1155,11 @@ abstract class HighRollerAxis {
  *
  */
 
-class HighRollerXAxis extends HighRollerAxis {
+class XAxis extends Axis {
 
 	function __construct(){
 		parent::__construct();
-		$this->labels = new HighRollerXAxisLabels();
+		$this->labels = new XAxisLabels();
 	}
 }
 ?><?php
@@ -1170,7 +1172,7 @@ class HighRollerXAxis extends HighRollerAxis {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1184,12 +1186,12 @@ class HighRollerXAxis extends HighRollerAxis {
  *
  */
 
-class HighRollerXAxisLabels {
+class XAxisLabels {
 
 	public $style;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -1202,7 +1204,7 @@ class HighRollerXAxisLabels {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1216,10 +1218,9 @@ class HighRollerXAxisLabels {
  *
  */
 
-class HighRollerYAxis extends HighRollerAxis {
+class YAxis extends Axis {
 
 	function __construct(){
 		parent::__construct();
 	}
 }
-?>
