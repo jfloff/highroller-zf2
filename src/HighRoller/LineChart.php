@@ -24,7 +24,7 @@
 
 namespace HighRoller;
 
-class HighRollerLineChart extends ChartAbstract {
+class LineChart extends ChartAbstract {
 
 	function __construct(){
 		parent::__construct();
