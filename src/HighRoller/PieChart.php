@@ -32,4 +32,3 @@ class PieChart extends ChartAbstract {
 		$this->initPlotOptions();
   }
 }
-?>

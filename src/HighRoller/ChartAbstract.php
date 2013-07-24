@@ -1224,4 +1224,3 @@ class HighRollerYAxis extends HighRollerAxis {
 		parent::__construct();
 	}
 }
-?>

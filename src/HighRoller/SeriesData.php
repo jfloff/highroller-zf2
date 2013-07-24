@@ -24,7 +24,7 @@
 
 namespace HighRoller;
 
-class HighRollerSeriesData {
+class SeriesData {
 
 	public $name;
 	public $data = array();
@@ -37,5 +37,3 @@ class HighRollerSeriesData {
 		$this->data[] = $chartdata;
 	}
 }
-
-?>

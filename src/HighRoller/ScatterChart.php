@@ -34,4 +34,3 @@ class ScatterChart extends ChartAbstract {
 		$this->initPlotOptions();
   }
 }
-?>

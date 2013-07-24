@@ -34,4 +34,3 @@ class SplineChart extends ChartAbstract {
 		$this->initPlotOptions();
   }
 }
-?>

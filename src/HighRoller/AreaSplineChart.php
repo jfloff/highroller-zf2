@@ -34,4 +34,3 @@ class AreaSplineChart extends ChartAbstract {
 		$this->initPlotOptions();
   }
 }
-?>

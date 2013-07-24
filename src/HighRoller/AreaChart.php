@@ -36,4 +36,3 @@ class AreaChart extends ChartAbstract {
 		// $this->chart->endOnTick = false;
   }
 }
-?>

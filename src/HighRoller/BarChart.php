@@ -34,4 +34,3 @@ class BarChart extends ChartAbstract {
 		$this->initPlotOptions();
   }
 }
-?>

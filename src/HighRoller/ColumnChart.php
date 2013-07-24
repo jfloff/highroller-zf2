@@ -34,4 +34,3 @@ class ColumnChart extends ChartAbstract {
 		$this->initPlotOptions();
 	}
 }
-?>

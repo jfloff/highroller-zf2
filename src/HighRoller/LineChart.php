@@ -34,4 +34,3 @@ class LineChart extends ChartAbstract {
 		$this->initPlotOptions();
   }
 }
-?>
