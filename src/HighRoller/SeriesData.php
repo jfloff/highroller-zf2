@@ -30,7 +30,7 @@ class SeriesData {
 	public $data = array();
 
 	/** add data to your series data
-	* @param $chartdata - array or HighRollerSeriesData
+	* @param $chartdata - array or SeriesData
 	* @return void
 	*/
 	public function addData($chartdata){

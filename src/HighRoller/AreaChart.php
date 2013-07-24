@@ -29,8 +29,8 @@ class AreaChart extends ChartAbstract {
 	function __construct(){
 		parent::__construct();
 		$this->chart->type = 'area';
-		$this->xAxis = new HighRollerXAxis();
-		$this->yAxis = new HighRollerYAxis();
+		$this->xAxis = new XAxis();
+		$this->yAxis = new YAxis();
 		$this->initPlotOptions();
 		// $this->chart->alignTicks = true;
 		// $this->chart->endOnTick = false;

@@ -29,8 +29,8 @@ class ScatterChart extends ChartAbstract {
 	function __construct(){
 		parent::__construct();
 		$this->chart->type = 'scatter';
-		$this->xAxis = new HighRollerXAxis();
-		$this->yAxis = new HighRollerYAxis();
+		$this->xAxis = new XAxis();
+		$this->yAxis = new YAxis();
 		$this->initPlotOptions();
   }
 }

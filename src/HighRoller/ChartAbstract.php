@@ -60,16 +60,16 @@ class ChartAbstract {
 	public $series = array();
 
 	function __construct(){
-		$this->chart = new HighRollerChart();
-		$this->title = new HighRollerTitle();
-		$this->legend = new HighRollerLegend();
-		$this->tooltip = new HighRollerToolTip();
-		$this->series = new HighRollerSeries();
+		$this->chart = new Chart();
+		$this->title = new Title();
+		$this->legend = new Legend();
+		$this->tooltip = new ToolTip();
+		$this->series = new Series();
 	}
 
 	function initPlotOptions(){
-		$this->plotOptions = new HighRollerPlotOptions($this->chart->type);
-		//$this->plotOptions->column = new HighRollerPlotOptionsByChartType($this->chart->type);
+		$this->plotOptions = new PlotOptions($this->chart->type);
+		//$this->plotOptions->column = new PlotOptionsByChartType($this->chart->type);
 	}
 
 	/** returns a javascript script tag with path to your HighCharts library source
@@ -118,7 +118,7 @@ class ChartAbstract {
 	 * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
 	 * @return void
 	 */
-	public function addSeries(HighRollerSeriesData $chartData){
+	public function addSeries(SeriesData $chartData){
 		if(is_object($this->series)){     // if series is an object
 			$this->series = array($chartData);
 		} else if(is_array($this->series)) {
@@ -144,7 +144,7 @@ class ChartAbstract {
 	* @return string - highcharts!
 	*/
 	function renderChart($engine = 'jquery'){
-		$options = new HighRollerOptions();   // change file/class name to new HighRollerGlobalOptions()
+		$options = new Options();   // change file/class name to new GlobalOptions()
 
 		if ( $engine == 'mootools')
 			$chartJS = 'window.addEvent(\'domready\', function() {';
@@ -237,12 +237,12 @@ class ChartAbstract {
  *
  */
 
-class HighRollerAxisLabel {
+class AxisLabel {
 
 	public $style;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -269,12 +269,12 @@ class HighRollerAxisLabel {
  *
  */
 
-class HighRollerAxisTitle {
+class AxisTitle {
 
 	public $style;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -301,7 +301,7 @@ class HighRollerAxisTitle {
  *
  */
 
-class HighRollerBackgroundColors {
+class BackgroundColors {
 
 	public $linearGradient;
 	public $stops;
@@ -333,14 +333,14 @@ class HighRollerBackgroundColors {
  *
  */
 
-class HighRollerChart {
+class Chart {
 
 	public $renderTo;
 	// public $animation;
 
 	function __construct(){
 		$this->renderTo = null;
-		// $this->animation = new HighRollerChartAnimation();
+		// $this->animation = new ChartAnimation();
 	}
 }
 ?><?php
@@ -367,7 +367,7 @@ class HighRollerChart {
  *
  */
 
-class HighRollerChartAnimation {
+class ChartAnimation {
 
 	function __construct(){
 	}
@@ -397,7 +397,7 @@ class HighRollerChartAnimation {
  *
  */
 
-class HighRollerCredits {
+class Credits {
 
 	function __construct(){
 	}
@@ -426,12 +426,12 @@ class HighRollerCredits {
  *
  */
 
-class HighRollerDataLabels {
+class DataLabels {
 
 	public $formatter = "";
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -458,7 +458,7 @@ class HighRollerDataLabels {
  *
  */
 
-class HighRollerDateTimeLabelFormats {
+class DateTimeLabelFormats {
 
 	function __construct(){
 	}
@@ -487,7 +487,7 @@ class HighRollerDateTimeLabelFormats {
  *
  */
 
-class HighRollerEngine {
+class Engine {
 
 	public $type;
 
@@ -519,7 +519,7 @@ class HighRollerEngine {
  *
  */
 
-class HighRollerFormatter {
+class Formatter {
 
 	public $formatter = null;
 
@@ -552,14 +552,14 @@ class HighRollerFormatter {
  *
  */
 
-class HighRollerLegend {
+class Legend {
 
 	public $style;
 	public $backgroundColor;
 	public $enabled = true;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -586,12 +586,12 @@ class HighRollerLegend {
  *
  */
 
-class HighRollerOptions {
+class Options {
 
 	public $global;
 
 	function __construct(){
-		$this->global = new HighRollerOptionsGlobal();
+		$this->global = new OptionsGlobal();
 	}
 }
 ?><?php
@@ -618,7 +618,7 @@ class HighRollerOptions {
  *
  */
 
-class HighRollerOptionsGlobal {
+class OptionsGlobal {
 
 	public $useUTC;
 
@@ -649,7 +649,7 @@ class HighRollerOptionsGlobal {
  *
  */
 
-class HighRollerPlotOptions {
+class PlotOptions {
 
 	public $series;
 	public $area = NULL;
@@ -661,15 +661,15 @@ class HighRollerPlotOptions {
 	public $spline = NULL;
 
 	function __construct($chartType){
-		$this->series = new HighRollerPlotOptionsSeriesOptions();
+		$this->series = new PlotOptionsSeriesOptions();
 		switch ($chartType) {
-			case 'area': 	$this->area = new HighRollerPlotOptionsByChartType(); break;
-			case 'bar':  	$this->bar = new HighRollerPlotOptionsByChartType(); break;
-			case 'column':	$this->column = new HighRollerPlotOptionsByChartType(); break;
-			case 'line':  	$this->line = new HighRollerPlotOptionsByChartType(); break;
-			case 'pie':  	$this->pie = new HighRollerPlotOptionsByChartType(); break;
-			case 'scatter': $this->scatter = new HighRollerPlotOptionsByChartType(); break;
-			case 'spline':  $this->spline = new HighRollerPlotOptionsByChartType(); break;
+			case 'area': 	$this->area = new PlotOptionsByChartType(); break;
+			case 'bar':  	$this->bar = new PlotOptionsByChartType(); break;
+			case 'column':	$this->column = new PlotOptionsByChartType(); break;
+			case 'line':  	$this->line = new PlotOptionsByChartType(); break;
+			case 'pie':  	$this->pie = new PlotOptionsByChartType(); break;
+			case 'scatter': $this->scatter = new PlotOptionsByChartType(); break;
+			case 'spline':  $this->spline = new PlotOptionsByChartType(); break;
 		}
 	}
 }
@@ -697,14 +697,14 @@ class HighRollerPlotOptions {
  *
  */
 
-class HighRollerPlotOptionsByChartType {
+class PlotOptionsByChartType {
 
 	public $dataLabels;
 	public $formatter = "";
 	public $pointPadding;
 
 	function __construct(){
-		$this->dataLabels = new HighRollerDataLabels();
+		$this->dataLabels = new DataLabels();
 	}
 }
 ?><?php
@@ -731,7 +731,7 @@ class HighRollerPlotOptionsByChartType {
  *
  */
 
-class HighRollerSelect {
+class Select {
 
 	public $enabled;
 	public $fillColor;
@@ -766,7 +766,7 @@ class HighRollerSelect {
  *
  */
 
-class HighRollerHover {
+class Hover {
 
 	public $enabled;
 	public $fillColor;
@@ -801,14 +801,14 @@ class HighRollerHover {
  *
  */
 
-class HighRollerStates {
+class States {
 
 	public $hover;
 	public $select;
 
 	function __construct(){
-		$this->hover = new HighRollerHover();
-		$this->select = new HighRollerSelect();
+		$this->hover = new Hover();
+		$this->select = new Select();
 	}
 }
 ?><?php
@@ -835,7 +835,7 @@ class HighRollerStates {
  *
  */
 
-class HighRollerMarker {
+class Marker {
 
 	public $enabled;
 	public $fillColor;
@@ -846,7 +846,7 @@ class HighRollerMarker {
 	public $symbol;
 
 	function __construct(){
-		$this->states = new HighRollerStates();
+		$this->states = new States();
 	}
 }
 ?><?php
@@ -873,18 +873,18 @@ class HighRollerMarker {
  *
  */
 
-class HighRollerSeries {
+class Series {
 
 	public $name;
 	public $data = array();
 	public $marker;
 
 	function __construct(){
-		$this->marker = new HighRollerMarker();
+		$this->marker = new Marker();
 	}
 
 	/** add data to your series data
-	* @param $chartdata - array or HighRollerSeriesData
+	* @param $chartdata - array or SeriesData
 	* @return void
 	*/
 	public function addData($chartdata){
@@ -915,13 +915,13 @@ class HighRollerSeries {
  *
  */
 
-class HighRollerSeriesData {
+class SeriesData {
 
 	public $name;
 	public $data = array();
 
 	/** add data to your series data
-	* @param $chartdata - array or HighRollerSeriesData
+	* @param $chartdata - array or SeriesData
 	* @return void
 	*/
 	public function addData($chartdata){
@@ -953,13 +953,13 @@ class HighRollerSeriesData {
  *
  */
 
-class HighRollerPlotOptionsSeriesOptions {
+class PlotOptionsSeriesOptions {
 
 	public $dataLabels;
 	public $stacking = null;
 
 	function __construct(){
-		$this->dataLabels = new HighRollerDataLabels();
+		$this->dataLabels = new DataLabels();
 	}
 }
 ?><?php
@@ -986,7 +986,7 @@ class HighRollerPlotOptionsSeriesOptions {
  *
  */
 
-class HighRollerStyle {
+class Style {
 
 	function __construct(){
 	}
@@ -1015,13 +1015,13 @@ class HighRollerStyle {
  *
  */
 
-class HighRollerTitle {
+class Title {
 
 	public $text;
 	// public $style;
 
 	function __construct(){
-		// $this->style = new HighRollerStyle();
+		// $this->style = new Style();
 	}
 }
 ?><?php
@@ -1048,7 +1048,7 @@ class HighRollerTitle {
  *
  */
 
-class HighRollerToolTip {
+class ToolTip {
 
 	public $backgroundColor = '#FFFFFF';
 	public $formatter = "";
@@ -1080,7 +1080,7 @@ class HighRollerToolTip {
  *
  */
 
-class HighRollerPlotLines {
+class PlotLines {
 
 	public $color = '#aa4643';
 	public $width = 3;
@@ -1113,7 +1113,7 @@ class HighRollerPlotLines {
  *
  */
 
-abstract class HighRollerAxis {
+abstract class Axis {
 
 	public $labels;
 	public $title;
@@ -1123,11 +1123,11 @@ abstract class HighRollerAxis {
 	public $plotLines = array();	// @TODO instantiating a new plotLines object isn't working, setting as an array
 
 	function __construct(){
-		$this->title = new HighRollerAxisTitle();
-		$this->dateTimeLabelFormats = new HighRollerDateTimeLabelFormats();
+		$this->title = new AxisTitle();
+		$this->dateTimeLabelFormats = new DateTimeLabelFormats();
 	}
 
-	public function addPlotLines(HighRollerPlotLines $plotLines) {
+	public function addPlotLines(PlotLines $plotLines) {
 		$this->plotLines[] = $plotLines;
 	}
 }
@@ -1155,11 +1155,11 @@ abstract class HighRollerAxis {
  *
  */
 
-class HighRollerXAxis extends HighRollerAxis {
+class XAxis extends Axis {
 
 	function __construct(){
 		parent::__construct();
-		$this->labels = new HighRollerXAxisLabels();
+		$this->labels = new XAxisLabels();
 	}
 }
 ?><?php
@@ -1186,12 +1186,12 @@ class HighRollerXAxis extends HighRollerAxis {
  *
  */
 
-class HighRollerXAxisLabels {
+class XAxisLabels {
 
 	public $style;
 
 	function __construct(){
-		$this->style = new HighRollerStyle();
+		$this->style = new Style();
 	}
 }
 ?><?php
@@ -1218,7 +1218,7 @@ class HighRollerXAxisLabels {
  *
  */
 
-class HighRollerYAxis extends HighRollerAxis {
+class YAxis extends Axis {
 
 	function __construct(){
 		parent::__construct();
