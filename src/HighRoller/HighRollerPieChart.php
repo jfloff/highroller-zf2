@@ -22,6 +22,8 @@
  *
  */
 
+namespace HighRoller;
+
 class HighRollerPieChart extends HighRoller {
 
 	function __construct(){

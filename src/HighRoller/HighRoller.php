@@ -48,6 +48,8 @@
 *
 */
 
+namespace HighRoller;
+
 class HighRoller {
 
 	public $chart;

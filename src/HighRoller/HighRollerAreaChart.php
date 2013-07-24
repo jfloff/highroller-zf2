@@ -22,6 +22,8 @@
  *
  */
 
+namespace HighRoller;
+
 class HighRollerAreaChart extends HighRoller {
 
 	function __construct(){

@@ -22,6 +22,8 @@
  *
  */
 
+namespace HighRoller;
+
 class HighRollerSeriesData {
 
 	public $name;

@@ -22,6 +22,8 @@
  *
  */
 
+namespace HighRoller;
+
 class HighRollerBarChart extends HighRoller {
 
 	function __construct(){

@@ -22,6 +22,8 @@
  *
  */
 
+namespace HighRoller;
+
 class HighRollerSplineChart extends HighRoller {
 
 	function __construct(){
