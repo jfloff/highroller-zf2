@@ -11,7 +11,7 @@
 * Licensed to Gravity.com under one or more contributor license agreements.
 * See the NOTICE file distributed with this work for additional information
 * regarding copyright ownership.  Gravity.com licenses this file to you use
-* under the Apache License, Version 2.0 (the License); you may not this
+* under the Apache License, Version 2.0 (the License); you may not use this
 * file except in compliance with the License.  You may obtain a copy of the
 * License at
 *
@@ -34,7 +34,7 @@
 * Licensed to Gravity.com under one or more contributor license agreements.
 * See the NOTICE file distributed with this work for additional information
 * regarding copyright ownership.  Gravity.com licenses this file to you use
-* under the Apache License, Version 2.0 (the License); you may not this
+* under the Apache License, Version 2.0 (the License); you may not use this
 * file except in compliance with the License.  You may obtain a copy of the
 * License at
 *
@@ -223,7 +223,7 @@ class ChartAbstract {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -255,7 +255,7 @@ class HighRollerAxisLabel {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -287,7 +287,7 @@ class HighRollerAxisTitle {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -319,7 +319,7 @@ class HighRollerBackgroundColors {
  *  Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -353,7 +353,7 @@ class HighRollerChart {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -383,7 +383,7 @@ class HighRollerChartAnimation {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -412,7 +412,7 @@ class HighRollerCredits {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -444,7 +444,7 @@ class HighRollerDataLabels {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -473,7 +473,7 @@ class HighRollerDateTimeLabelFormats {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -505,7 +505,7 @@ class HighRollerEngine {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -538,7 +538,7 @@ class HighRollerFormatter {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -572,7 +572,7 @@ class HighRollerLegend {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -604,7 +604,7 @@ class HighRollerOptions {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -635,7 +635,7 @@ class HighRollerOptionsGlobal {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -683,7 +683,7 @@ class HighRollerPlotOptions {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -717,7 +717,7 @@ class HighRollerPlotOptionsByChartType {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -752,7 +752,7 @@ class HighRollerSelect {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -787,7 +787,7 @@ class HighRollerHover {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -821,7 +821,7 @@ class HighRollerStates {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -859,7 +859,7 @@ class HighRollerMarker {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -901,7 +901,7 @@ class HighRollerSeries {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -939,7 +939,7 @@ class HighRollerSeriesData {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -972,7 +972,7 @@ class HighRollerPlotOptionsSeriesOptions {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1001,7 +1001,7 @@ class HighRollerStyle {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1034,7 +1034,7 @@ class HighRollerTitle {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1066,7 +1066,7 @@ class HighRollerToolTip {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1099,7 +1099,7 @@ class HighRollerPlotLines {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1141,7 +1141,7 @@ abstract class HighRollerAxis {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1172,7 +1172,7 @@ class HighRollerXAxis extends HighRollerAxis {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -1204,7 +1204,7 @@ class HighRollerXAxisLabels {
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
