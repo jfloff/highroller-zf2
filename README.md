@@ -50,16 +50,16 @@ Open `module/Application/src/Application/Controller/IndexController.php`.
 
 1. Include HighRoller files:
     ```php
-    use HighRollerLineChart;
-    use HighRollerSeriesData;
+    use HighRoller\LineChart;
+    use HighRoller\SeriesData;
     ```
 
 2. Inside `indexAction` function create a new line chart:
     ```php
-    $linechart = new HighRollerLineChart();
+    $linechart = new LineChart();
     $linechart->title->text = 'Line Chart';
 
-    $series = new HighRollerSeriesData();
+    $series = new SeriesData();
     $series->name = 'myData';
 
     $chartData = array(5324, 7534, 6234, 7234, 8251, 10324);

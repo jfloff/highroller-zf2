@@ -1,14 +1,14 @@
 <?php
 /**
  * Author: jmac
- * Date: 9/14/11
- * Time: 5:46 PM
- * Desc: HighRoller Area Chart SubClass
+ * Date: 9/21/11
+ * Time: 1:11 PM
+ * Desc: HighRoller Series Data Class
  *
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -22,14 +22,18 @@
  *
  */
 
-class HighRollerAreaSplineChart extends HighRoller {
+namespace HighRoller;
 
-	function __construct(){
-		parent::__construct();
-		$this->chart->type = 'areaspline';
-		$this->xAxis = new HighRollerXAxis();
-		$this->yAxis = new HighRollerYAxis();
-		$this->initPlotOptions();
-  }
+class SeriesData {
+
+	public $name;
+	public $data = array();
+
+	/** add data to your series data
+	* @param $chartdata - array or SeriesData
+	* @return void
+	*/
+	public function addData($chartdata){
+		$this->data[] = $chartdata;
+	}
 }
-?>

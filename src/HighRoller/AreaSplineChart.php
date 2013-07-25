@@ -3,12 +3,12 @@
  * Author: jmac
  * Date: 9/14/11
  * Time: 5:46 PM
- * Desc: HighRoller Line Chart SubClass
+ * Desc: HighRoller Area Chart SubClass
  *
  * Licensed to Gravity.com under one or more contributor license agreements.
  * See the NOTICE file distributed with this work for additional information
  * regarding copyright ownership.  Gravity.com licenses this file to you use
- * under the Apache License, Version 2.0 (the License); you may not this
+ * under the Apache License, Version 2.0 (the License); you may not use this
  * file except in compliance with the License.  You may obtain a copy of the
  * License at
  *
@@ -22,14 +22,15 @@
  *
  */
 
-class HighRollerLineChart extends HighRoller {
+namespace HighRoller;
+
+class AreaSplineChart extends ChartAbstract {
 
 	function __construct(){
 		parent::__construct();
-		$this->chart->type = 'line';
-		$this->xAxis = new HighRollerXAxis();
-		$this->yAxis = new HighRollerYAxis();
+		$this->chart->type = 'areaspline';
+		$this->xAxis = new XAxis();
+		$this->yAxis = new YAxis();
 		$this->initPlotOptions();
   }
 }
-?>
