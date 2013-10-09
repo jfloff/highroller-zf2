@@ -91,7 +91,7 @@ Open `module/Application/view/application/index/index.phtml`
     <div id="highroller"></div>
     <?php
         $this->highroller->chart->renderTo = "highroller";
-        echo $this->headScript()->appendScript($this->highroller->renderChart());
+        $this->headScript()->appendScript($this->highroller->renderChart());
     ?>
     ```
 
