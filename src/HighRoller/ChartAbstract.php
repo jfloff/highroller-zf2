@@ -190,8 +190,10 @@ class ChartAbstract {
 		foreach ($arrObj as $key => $val) {
 			$val = (is_array($val) || is_object($val)) ? $this->toArray($val) : $val;
 			// tests if val empty, and then do some exceptions
-			if(!empty($val) || ($val === false) || ($val === 0))
+			if(!empty($val) || ($val === false) || ($val === 0) || is_numeric($val))
+			{
 				$arr[$key] = $val;
+			}
 		}
 
 		return (isset($arr)) ? $arr : NULL;
