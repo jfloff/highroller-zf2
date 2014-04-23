@@ -108,7 +108,8 @@ class ChartAbstract {
 	 * @return void
 	 */
 	public function addData($chartdata){
-		if(!is_array($chartdata)){
+		if(!is_array($chartdata))
+		{
 			die("ChartAbstract::addData() - data format must be an array.");
 		}
 		$this->series = array($chartdata);
@@ -118,10 +119,13 @@ class ChartAbstract {
 	 * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
 	 * @return void
 	 */
-	public function addSeries(SeriesData $chartData){
-		if(is_object($this->series)){     // if series is an object
+	public function addSeries(Series $chartData){
+		if(is_object($this->series))
+		{     // if series is an object
 			$this->series = array($chartData);
-		} else if(is_array($this->series)) {
+		}
+		else if(is_array($this->series))
+		{
 			$this->series[] = $chartData;
 		}
 	}
@@ -704,9 +708,12 @@ class PlotOptionsByChartType {
 	public $dataLabels;
 	public $formatter = "";
 	public $pointPadding;
+	public $marker;
 
-	function __construct(){
+	function __construct()
+	{
 		$this->dataLabels = new DataLabels();
+		$this->marker = new Marker();
 	}
 }
 ?><?php
@@ -881,7 +888,8 @@ class Series {
 	public $data = array();
 	public $marker;
 
-	function __construct(){
+	function __construct()
+	{
 		$this->marker = new Marker();
 	}
 
@@ -889,7 +897,8 @@ class Series {
 	* @param $chartdata - array or SeriesData
 	* @return void
 	*/
-	public function addData($chartdata){
+	public function addData($chartdata)
+	{
 		$this->data[] = $chartdata;
 	}
 }
