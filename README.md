@@ -1,7 +1,10 @@
+##### I'm discontinuing this project in favor of more flexible approaches. For my own projects I've switched to [HighchartsPHP](https://github.com/ghunti/HighchartsPHP) with ease. I recommend you to also make the switch, since I won't be updating this packages with new features. Thank you all for your support!
+
+
 HighRoller for Zend Framework 2
 =======
-Package of Highroller by [@jmaclabs](https://twitter.com/#!/JMACLABS) ready for Zend Framework 2 integration via Composer.
 
+Package of Highroller by [@jmaclabs](https://twitter.com/#!/JMACLABS) ready for Zend Framework 2 integration via Composer.
 
 Introduction
 ------------
