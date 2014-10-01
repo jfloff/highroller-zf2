@@ -119,7 +119,7 @@ class ChartAbstract {
 	 * @param $chartdata - array, data provided in 1 of 3 HighCharts supported array formats (array, assoc array or mult-dimensional array)
 	 * @return void
 	 */
-	public function addSeries(Series $chartData){
+	public function addSeries(SeriesData $chartData){
 		if(is_object($this->series))
 		{     // if series is an object
 			$this->series = array($chartData);
